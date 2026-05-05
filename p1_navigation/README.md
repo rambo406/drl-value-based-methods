@@ -1,55 +1,57 @@
-[//]: # (Image References)
+# Navigation Project
 
-[image1]: https://user-images.githubusercontent.com/10624937/42135619-d90f2f28-7d12-11e8-8823-82b970a54d7e.gif "Trained Agent"
+## Project Details
 
-# Project 1: Navigation
+This project trains an agent to navigate a large square world and collect yellow bananas while avoiding blue bananas using Deep Q-Network (DQN).
 
-### Introduction
+- **State space**: 37 dimensions containing the agent's velocity and ray-based perception of objects around the agent's forward direction.
+- **Action space**: 4 discrete actions:
+  - `0` - move forward
+  - `1` - move backward
+  - `2` - turn left
+  - `3` - turn right
+- **Reward**: +1 for collecting a yellow banana, -1 for collecting a blue banana
+- **Solved**: The environment is considered solved when the agent gets an average score of +13 over 100 consecutive episodes.
 
-For this project, you will train an agent to navigate (and collect bananas!) in a large, square world.  
+## Getting Started
 
-![Trained Agent][image1]
+### Dependencies
 
-A reward of +1 is provided for collecting a yellow banana, and a reward of -1 is provided for collecting a blue banana.  Thus, the goal of your agent is to collect as many yellow bananas as possible while avoiding blue bananas.  
+1. Python 3.6+
+2. PyTorch (with CUDA support recommended)
+3. Unity ML-Agents (unityagents)
+4. NumPy
+5. Matplotlib
 
-The state space has 37 dimensions and contains the agent's velocity, along with ray-based perception of objects around agent's forward direction.  Given this information, the agent has to learn how to best select actions.  Four discrete actions are available, corresponding to:
-- **`0`** - move forward.
-- **`1`** - move backward.
-- **`2`** - turn left.
-- **`3`** - turn right.
+### Installation
 
-The task is episodic, and in order to solve the environment, your agent must get an average score of +13 over 100 consecutive episodes.
+```
+pip install torch numpy matplotlib
+```
 
-### Getting Started
+For the Unity environment, follow the instructions in the [DRLND GitHub repository](https://github.com/udacity/deep-reinforcement-learning#dependencies) to set up your Python environment.
 
-1. Download the environment from one of the links below.  You need only select the environment that matches your operating system:
-    - Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
-    - Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana.app.zip)
-    - Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86.zip)
-    - Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip)
-    
-    (_For Windows users_) Check out [this link](https://support.microsoft.com/en-us/help/827218/how-to-determine-whether-a-computer-is-running-a-32-bit-version-or-64) if you need help with determining if your computer is running a 32-bit version or 64-bit version of the Windows operating system.
+Download the Banana environment:
+- Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip)
+- Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
+- Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana.app.zip)
 
-    (_For AWS_) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux_NoVis.zip) to obtain the environment.
+Place the unzipped file in the `p1_navigation/` folder.
 
-2. Place the file in the course GitHub repository, in the `p1_navigation/` folder, and unzip (or decompress) the file. 
+## Instructions
 
-### Instructions
+To train the agent, open `Navigation.ipynb` in Jupyter Notebook and run all cells. The training will:
 
-Follow the instructions in `Navigation.ipynb` to get started with training your own agent!  
+1. Initialize the Banana environment
+2. Create a DQN agent
+3. Train until the average score reaches +13 over 100 episodes
+4. Save trained weights to `checkpoint.pth`
+5. Plot the training scores
 
-### (Optional) Challenge: Learning from Pixels
+## Files
 
-After you have successfully completed the project, if you're looking for an additional challenge, you have come to the right place!  In the project, your agent learned from information such as its velocity, along with ray-based perception of objects around its forward direction.  A more challenging task would be to learn directly from pixels!
-
-To solve this harder task, you'll need to download a new Unity environment.  This environment is almost identical to the project environment, where the only difference is that the state is an 84 x 84 RGB image, corresponding to the agent's first-person view.  (**Note**: Udacity students should not submit a project with this new environment.)
-
-You need only select the environment that matches your operating system:
-- Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/VisualBanana_Linux.zip)
-- Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/VisualBanana.app.zip)
-- Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/VisualBanana_Windows_x86.zip)
-- Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/VisualBanana_Windows_x86_64.zip)
-
-Then, place the file in the `p1_navigation/` folder in the course GitHub repository, and unzip (or decompress) the file.  Next, open `Navigation_Pixels.ipynb` and follow the instructions to learn how to use the Python API to control the agent.
-
-(_For AWS_) If you'd like to train the agent on AWS, you must follow the instructions to [set up X Server](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md), and then download the environment for the **Linux** operating system above.
+- `Navigation.ipynb` - Main notebook for training and evaluation
+- `dqn_agent.py` - DQN Agent and Replay Buffer implementation
+- `model.py` - Neural network architecture (QNetwork)
+- `checkpoint.pth` - Saved model weights (created after training)
+- `Report.md` - Detailed report of the implementation
